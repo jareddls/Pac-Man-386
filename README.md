@@ -1,2 +1,4 @@
-# Pac-Man 386
- 
+Members:\
+Jared De Los Santos\
+Tiffany Tran\
+Kevin La
