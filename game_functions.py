@@ -1,11 +1,12 @@
 import pygame as pg
-
+import sys
 
 #sm stands for start menu
 def sm_events(self):
     for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.running = False
+                sys.exit()
             if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
                 self.state = 'playing'
 
