@@ -37,6 +37,7 @@ class Game:
             self.maze.update()
             pg.display.flip()
 
+
             # gf.check_events(settings=self.settings, sound=self.sound, screen=self.screen, stats=self.stats, sb=self.scoreboard, play_button=self.play_button)
 
             # if self.stats.game_active:
