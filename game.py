@@ -24,6 +24,7 @@ class Game:
             self.maze.update()
             pg.display.flip()
 
+
 def main():
     game = Game()
     game.play()
