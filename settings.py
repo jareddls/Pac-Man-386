@@ -5,6 +5,12 @@ class Settings():
         #Screen settings
         self.screen_width = 610
         self.screen_height = 670
+        self.img = pg.image.load('images/Pac-Man-logo.png')
+        self.bg = pg.transform.scale(self.img,(600, 250))
+        self.bg_color = (0, 0, 0)
+
+        self.ship_limit = 3      # total ships allowed in game before game over
+
 
         #maybe have fps cap so speed can't be weird
         self.fps = 60
@@ -16,5 +22,5 @@ class Settings():
         self.rows = 30
         self.cols = 28
 
-        self.font = pg.font.Font('fonts/pixel.ttf')
+        # self.font = pg.font.Font('fonts/pixel.ttf')
         self.txt_size = 24
