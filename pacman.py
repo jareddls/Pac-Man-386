@@ -18,17 +18,30 @@ class Pacman (Sprite):
         self.maze = maze
         self.image = pg.image.load('images/pacman_right0.png')
         self.rect = self.image.get_rect()
+        self.radius = maze.block_size // 5
 
-        
+        #starting point/spawn poiint
         self.spawn_info = self.maze.player_spawn[1]
         self.tile = self.maze.player_spawn[0]
         self.rect.centerx, self.rect.centery = self.spawn_info
+
         self.dying = False
+        self.direction = False
+        self.speed = maze.block_size // 7
 
-        
+        self.timer_down = Timer(image_list=self.pacman_down, is_loop = True)
+        self.timer_up = Timer(image_list=self.pacman_up, is_loop = True)
+        self.timer_left = Timer(image_list=self.pacman_left, is_loop = True)
+        self.timer_right = Timer(image_list=self.pacman_right, is_loop = True)
 
+        self.timer_death = Timer(image_list=self.pacman_death, is_loop = False)
 
+        self.timer = self.timer_right
    
+    def reset_player(self):
+        # reset player to spawn point
+        self.rect.centerx, self.rect.centery = self.spawn_info
+
     def update(self):
         self.draw()
 
