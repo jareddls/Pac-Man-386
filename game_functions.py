@@ -52,11 +52,11 @@ movement = {pg.K_LEFT: Vector(-1, 0),   # dictionary to map keys to Vector veloc
             }
 
   
-def check_keydown_events(event, settings, ship):
+def check_keydown_events(event, settings, pacman):
     key = event.key
     if key == pg.K_SPACE: 
         ship.shooting = True
-    elif key in movement.keys():
+    if key in movement.keys():
         ship.vel += settings.ship_speed_factor * movement[key]
 
 def check_keyup_events(event, settings, ship):
