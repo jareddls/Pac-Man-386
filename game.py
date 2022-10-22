@@ -1,6 +1,6 @@
 import pygame as pg
 import game_functions as gf
-from pacman import *
+from pacman import Pacman
 from ghost import *
 from settings import *
 from maze import Maze
@@ -18,6 +18,7 @@ class Game:
         pg.init()
         self.screen = pg.display.set_mode((800, 600))
         self.maze = Maze(screen=self.screen, maze_map_file='maze.txt')
+        self.player = Pacman(screen = self.screen, maze = self.maze)
 
         # self.settings = Settings()
         # size = self.settings.screen_width, self.settings.screen_height, self.settings.maze_width   # tuple
@@ -35,6 +36,7 @@ class Game:
             gf.sm_events(self)
             self.maze.build_maze()
             self.maze.update()
+            self.player.draw()
             pg.display.flip()
 
 
