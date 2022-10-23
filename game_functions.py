@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+import time
 import pickle
 # from pacman import Pacman
 
@@ -96,6 +97,8 @@ def check_play_button(settings, sound, screen, stats, sb, play_button, mouse_x, 
 
         pg.mixer.music.load('sounds/pacman_beginning.wav')
         sound.play_bg()
+        # time.sleep(5)
+        # sound.stop_bg()
         
 
 def check_high_score(stats, sb):
