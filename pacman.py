@@ -1,7 +1,9 @@
 import pygame as pg
 from pygame.sprite import Sprite
+from game_functions import clamp
 from settings import Settings
 from timer import Timer 
+from vector import Vector
 
 class Pacman (Sprite):
 
@@ -10,12 +12,13 @@ class Pacman (Sprite):
     pacman_left = [pg.transform.rotozoom(pg.image.load(f'images/pacman_left{n}.png'), 0, 1) for n in range(2)]
     pacman_right = [pg.transform.rotozoom(pg.image.load(f'images/pacman_right{n}.png'), 0, 1) for n in range(2)]
 
-    pacman_death = [pg.transform.rotozoom(pg.image.load(f'images/pacman_death{n}.png'), 0, 1) for n in range(12)]
+    pacman_death = [pg.transform.rotozoom(pg.image.load(f'images/pacman_death{n}.png'), 0, 1) for n in range(11)]
     
     def __init__(self, screen, maze):
         super().__init__()
         self.screen = screen
         self.maze = maze
+        self.vel = Vector()
         self.image = pg.image.load('images/pacman_right0.png')
         self.rect = self.image.get_rect()
         self.radius = maze.block_size // 5
@@ -41,10 +44,16 @@ class Pacman (Sprite):
     def reset_player(self):
         # reset player to spawn point
         self.rect.centerx, self.rect.centery = self.spawn_info
+        self.vel = Vector()
 
     def update(self):
         self.draw()
-
+        if self.timer == self.timer_death and not self.timer.is_expired():
+            self.vel = Vector()
+        else:
+            self.posn += self.vel
+            self.posn, self.rect = clamp(self.posn, self.rect, self.settings)
+            
     def draw(self):
         self.screen.blit(self.image, self.rect)
 

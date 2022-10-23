@@ -1,5 +1,7 @@
 import pygame as pg
 import sys
+import pickle
+# from pacman import Pacman
 
 from vector import Vector
 
@@ -54,27 +56,25 @@ movement = {pg.K_LEFT: Vector(-1, 0),   # dictionary to map keys to Vector veloc
   
 def check_keydown_events(event, settings, pacman):
     key = event.key
-    if key == pg.K_SPACE: 
-        ship.shooting = True
+    # if key == pg.K_SPACE: 
+    #     pacman.shooting = True
     if key in movement.keys():
-        ship.vel += settings.ship_speed_factor * movement[key]
+        pacman.vel += settings.pacman_speed_factor * movement[key]
 
-def check_keyup_events(event, settings, ship):
+def check_keyup_events(event, settings, pacman):
     key = event.key
-    if key == pg.K_SPACE: 
-        ship.shooting = False
-    elif key == pg.K_ESCAPE:
-        ship.vel = Vector()
+    if key == pg.K_ESCAPE:
+        pacman.vel = Vector()
     elif key in movement.keys(): 
-        ship.vel -= settings.ship_speed_factor * movement[key]
+        pacman.vel -= settings.pacman_speed_factor * movement[key]
 
-def check_events(settings, sound, screen, stats, sb, play_button):
+def check_events(settings, sound, screen, stats, sb, play_button, pacman):
     for event in pg.event.get():
         if event.type == pg.QUIT: sys.exit()
         elif event.type == pg.KEYDOWN: 
-            check_keydown_events(event=event, settings=settings)
+            check_keydown_events(event=event, settings=settings, pacman=pacman)
         elif event.type == pg.KEYUP: 
-            check_keyup_events(event=event, settings = settings)
+            check_keyup_events(event=event, settings = settings, pacman=pacman)
         elif event.type == pg.MOUSEBUTTONUP:
             mouse_x, mouse_y = pg.mouse.get_pos()
             check_play_button(settings, sound, screen, stats, sb, play_button, mouse_x, mouse_y)
@@ -94,9 +94,8 @@ def check_play_button(settings, sound, screen, stats, sb, play_button, mouse_x, 
         sb.prep_score()
         sb.reset()
 
-        # ship.center_ship()
-        # pg.mixer.music.load('sounds/bg_song/bg_song0.wav')
-        # sound.play_bg()
+        pg.mixer.music.load('sounds/pacman_beginning.wav')
+        sound.play_bg()
         
 
 def check_high_score(stats, sb):

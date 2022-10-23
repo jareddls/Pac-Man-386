@@ -23,7 +23,6 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
-        # self.prep_ships()
 
     def increment_score(self, type): 
         self.score += type
@@ -69,43 +68,28 @@ class Scoreboard:
         self.level_rect.right = self.score_rect.right
         self.level_rect.bottom = self.score_rect.bottom + 710
 
-    # def prep_ships(self):
-    #     """Show how many ships are left."""
-    #     self.ships = Group()
-    #     for ship_number in range(self.stats.ships_left):
-    #         # ship = Ship(game=self.game, settings=self.settings, stats=self.stats, screen=self.screen,sound=self.sound)
-    #         ship.rect.x = 10 + ship_number * (ship.rect.width * 1.5)
-    #         ship.rect.y = 750
-    #         self.ships.add(ship)
-
     def prep_pt_table(self):
         """Show the table"""
-        # self.score_table_text = self.font.render('* SCORE ADVANCE TABLE *', True, (255,255,255), (0,0,0))
-        # self.score_table_text_rect = self.score_table_text.get_rect()
-        # self.score_table_text_rect.center =  self.screen_rect.center
+        self.first_inkey_pts_text = self.font.render('INKEY', True, (255,255,255), (0,0,0))
+        self.first_inkey_pts_text_rect = self.first_inkey_pts_text.get_rect()
+        self.first_inkey_pts_text_rect =  (200, 350)
 
-        self.first_alien_pts_text = self.font.render('INKEY', True, (255,255,255), (0,0,0))
-        self.first_alien_pts_text_rect = self.first_alien_pts_text.get_rect()
-        self.first_alien_pts_text_rect =  (100, 350)
+        self.second_pinky_pts_text = self.font.render('PINKY', True, (255,255,255), (0,0,0))
+        self.second_pinky_pts_text_rect = self.second_pinky_pts_text.get_rect()
+        self.second_pinky_pts_text_rect = (200, 400)
 
-        self.second_alien_pts_text = self.font.render('PINKY', True, (255,255,255), (0,0,0))
-        self.second_alien_pts_text_rect = self.second_alien_pts_text.get_rect()
-        self.second_alien_pts_text_rect = (100, 400)
+        self.third_blinky_pts_text = self.font.render('BLINKY', True, (255,255,255), (0,0,0))
+        self.third_blinky_pts_text_rect = self.third_blinky_pts_text.get_rect()
+        self.third_blinky_pts_text_rect = (500, 350)
 
-        self.third_alien_pts_text = self.font.render('BLINKY', True, (255,255,255), (0,0,0))
-        self.third_alien_pts_text_rect = self.third_alien_pts_text.get_rect()
-        self.third_alien_pts_text_rect = (400, 350)
-
-        self.ufo_pts_text = self.font.render('CLYDE', True, (255,255,255), (0,0,0))
-        self.ufo_pts_text_rect = self.ufo_pts_text.get_rect()
-        self.ufo_pts_text_rect = (400, 400)
+        self.fourth_clyde_pts_text = self.font.render('CLYDE', True, (255,255,255), (0,0,0))
+        self.fourth_clyde_pts_text_rect = self.fourth_clyde_pts_text.get_rect()
+        self.fourth_clyde_pts_text_rect = (500, 400)
 
     def reset(self): 
         self.score = 0
         self.level = 1
         self.update_score()
-        # self.update_level()
-        # self.update_ships()
 
     def update_score(self): 
         self.draw_score()
@@ -115,9 +99,6 @@ class Scoreboard:
 
     def update_level(self): 
         self.draw_level()
-
-    def update_ships(self):
-        self.draw_ships() 
 
     def update_pt_table(self):
         self.draw_pt_table()
@@ -132,21 +113,14 @@ class Scoreboard:
     
     def draw_level(self):
         self.screen.blit(self.level_image, self.level_rect)
-    
-    def draw_ships(self):
-        self.ships.draw(self.screen)
-
 
     def draw_pt_table(self):
-        self.screen.blit(pg.image.load('images/blue_ghost_left0.png'), (225, 350))
-        self.screen.blit(pg.image.load('images/pink_ghost_left0.png'), (225, 400))
-        self.screen.blit(pg.image.load('images/red_ghost_right0.png'), (350, 350))
-        self.screen.blit(pg.image.load('images/yellow_ghost_right0.png'), (350, 400))
-        # self.screen.blit(pg.image.load('images/pacman_right0.png'), (450, 645))
+        self.screen.blit(pg.image.load('images/blue_ghost_left0.png'), (325, 350))
+        self.screen.blit(pg.image.load('images/pink_ghost_left0.png'), (325, 400))
+        self.screen.blit(pg.image.load('images/red_ghost_right0.png'), (450, 350))
+        self.screen.blit(pg.image.load('images/yellow_ghost_right0.png'), (450, 400))
 
-        self.screen.blit(self.first_alien_pts_text, self.first_alien_pts_text_rect)
-        self.screen.blit(self.second_alien_pts_text, self.second_alien_pts_text_rect)
-        self.screen.blit(self.third_alien_pts_text, self.third_alien_pts_text_rect)
-        self.screen.blit(self.ufo_pts_text, self.ufo_pts_text_rect)
-
-        # self.screen.blit(self.score_table_text, self.score_table_text_rect)
+        self.screen.blit(self.first_inkey_pts_text, self.first_inkey_pts_text_rect)
+        self.screen.blit(self.second_pinky_pts_text, self.second_pinky_pts_text_rect)
+        self.screen.blit(self.third_blinky_pts_text, self.third_blinky_pts_text_rect)
+        self.screen.blit(self.fourth_clyde_pts_text, self.fourth_clyde_pts_text_rect)

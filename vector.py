@@ -11,7 +11,7 @@ class Vector:
         self.x = self.y = self.z = 0
         for el in li:
             self.data.append(float(el))
-        self.x = self.data[0]
+        # self.x = self.data[0]
         if self.dims < 2:
             self.data.append(0.0)
             self.dims = 2
@@ -19,7 +19,7 @@ class Vector:
             self.data.append(0.0)
             self.dims = 3
         self.y = self.data[1]
-        self.z = self.data[2]
+        # self.z = self.data[2]
 
     @classmethod
     def create(cls, pta, ptb):       # create a Vector from pta to ptb
@@ -51,7 +51,7 @@ class Vector:
             return Vector(self.x + o, self.y + o, self.z + o)
         self.check_dims(self, o)
         return Vector(*[self.data[i] + o.data[i] for i in range(self.dims)])
-        # return Vector(self.x + o.x, self.y + o.y, self.z + o.z)
+        return Vector(self.x + o.x, self.y + o.y, self.z + o.z)
 
     def __radd__(self, o): return self + o
 
