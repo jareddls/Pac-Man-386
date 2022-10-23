@@ -1,43 +1,24 @@
 import pygame as pg
-import time
 
 class Sound:
     def __init__(self, bg_music):
         pg.mixer.init()
         pg.mixer.music.load(bg_music)
         pg.mixer.music.set_volume(0.2)
-        # gameover_sound = pg.mixer.Sound('sounds/important/gameover.wav')
-        # ufo_sound = pg.mixer.Sound('sounds/important/ufo.wav')
-        # self.sounds = {'gameover': gameover_sound, 'ufo_sound':ufo_sound }
 
-    def play_bg(self, loop=-1, start=0, fade_ms=3000):
+        pacman_beginning_sound = pg.mixer.Sound('sounds/pacman_beginning.wav')
+        pacman_death_sound = pg.mixer.Sound('sounds/pacman_death.wav')
+        pacman_pellet_sound = pg.mixer.Sound('sounds/pacman-pellet-eat.wav')
+
+        self.sounds = {'start': pacman_beginning_sound, 'death': pacman_death_sound, 'pellet': pacman_pellet_sound}
+
+    def play_beginning(self, loop=0, start=0, fade_ms=3000):
         pg.mixer.music.play(loop, start, fade_ms)
 
-    def stop_bg(self):
-        pg.mixer.music.stop()  
+    def pacman_death(self):
+        pg.mixer.Sound.play(self.sounds['death'])
+        pg.mixer.Sound.set_volume(self.sounds['death'], 0.1)
 
-    def alien_death(self):
-        pg.mixer.Sound.play(self.sounds['alien_death'])
-        pg.mixer.Sound.set_volume(self.sounds['alien_death'], 0.1)
-
-    def ship_death(self):
-        pg.mixer.Sound.play(self.sounds['ship_death'])
-        pg.mixer.Sound.set_volume(self.sounds['ship_death'], 0.1)
-
-    def ufo(self):
-        pg.mixer.Sound.play(self.sounds['ufo_sound'])
-
-
-    def shoot_laser(self, type): 
-        # pg.mixer.Sound.play(self.sounds['laser'])
-        
-        pg.mixer.Sound.play(self.sounds['alienlaser' if type == LaserType.ALIEN else 'laser'])
-        pg.mixer.Sound.set_volume(self.sounds['laser'], 0.1)
-        pg.mixer.Sound.set_volume(self.sounds['alienlaser'], 0.1)
-    def gameover(self): 
-        self.stop_bg() 
-        pg.mixer.music.load('sounds/important/gameover.wav')
-        self.play_bg(0,0,0)
-        time.sleep(2.5)
-        pg.mixer.music.load('sounds/important/start_song.wav')
-        self.play_bg()
+    def pacman_pellet(self):
+        pg.mixer.Sound.play(self.sounds['pellet'])
+        pg.mixer.Sound.set_volume(self.sounds['pellet'], 0.1)

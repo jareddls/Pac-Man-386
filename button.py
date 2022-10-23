@@ -1,10 +1,8 @@
 import pygame.font
 
-from game_stats import GameStats
-
 class Button():
 
-    def __init__(self, settings, screen, msg, x, y, font_size):
+    def __init__(self, screen, msg, x, y, font_size):
         """Initialize button attributes."""
         self.screen = screen
         self.screen_rect = screen.get_rect()

@@ -1,11 +1,22 @@
-from block import Block
-from random import choice
-from image_manager import ImageManager
+import pygame as pg
+from entity import Entity
+from constants import *
+from sprites import FruitSprites
 
+class Fruit(Entity):
+    def __init__(self, node, level=0):
+        Entity.__init__(self, node)
+        self.name = FRUIT
+        self.color = GREEN
+        self.lifespan = 5
+        self.timer = 0
+        self.destroy = False
+        self.points = 100 + level * 20
+        self.set_between_nodes(RIGHT)
 
-class Fruit(Block):
-    """Inherits from maze.Block to represent a fruit available for pickup in the maze"""
-    def __init__(self, x, y, width, height):
-        images = ['fruit0', 'fruit1', 'fruit2']
-        fruit_image, _ = ImageManager(img=choice(images), resize=(width // 2, height // 2)).get_image()
-        super(Fruit, self).__init__(x, y, width, height, fruit_image)
+        self.sprites = FruitSprites(self, level)
+
+    def update(self, dt):
+        self.timer += dt
+        if self.timer >= self.lifespan:
+            self.destroy = True
